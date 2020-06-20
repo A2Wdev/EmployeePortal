@@ -25,10 +25,10 @@ namespace Emp.Domain.core
 			return result;
 		}
 
-		public IEnumerable<Employee> GetEmployeeByHiringDate(DateTime hiringdate)
+		public IEnumerable<Employee> GetEmployeeByHiringDate(DateTime? hiringdate)
 		{
 
-			return _repositry.FindBy<Employee>(obj => obj.HiringDate == hiringdate);
+			return _repositry.FindBy<Employee>(obj => hiringdate == null || obj.HiringDate == hiringdate);
 
 		}
 	}

@@ -5,7 +5,7 @@ namespace Emp.Domain.core
 {
 	public interface IEmplpyeeService
 	{
-		IEnumerable<Employee> GetEmployeeByHiringDate(DateTime hiringdate);
+		IEnumerable<Employee> GetEmployeeByHiringDate(DateTime? hiringdate);
 
 		Employee AddEmployee(Employee employee);  
 
