@@ -1,0 +1,12 @@
+td, th {
+    border: 1px solid;
+    padding: 10px;
+    border-collapse: collapse;
+}
+table.table.table-bordered {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+button {
+    margin-bottom: 10px;
+}

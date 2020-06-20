@@ -19,7 +19,7 @@ namespace IdentityServer
 
         public static IEnumerable<ApiResource> Apis =>
             new ApiResource[] 
-            { new ApiResource("employee-api", "Employee API")};
+            { new ApiResource("employee-api", "Employee API") };
         
         public static IEnumerable<Client> Clients =>
             new Client[] 
@@ -31,17 +31,19 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.Code,
                     RedirectUris = new List<string>
                     {
-                        "http://localhost:60338/signin-oidc"
+                        "http://localhost:4200"
                     },
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "employee-api"
                     },
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())
-                    }
+                    },
+                    
                 }
             };
         

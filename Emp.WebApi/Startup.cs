@@ -14,6 +14,7 @@ namespace Emp.WebApi
 {
 	public class Startup
 	{
+		private const string DefaultCorsPolicyName = "employeePolicy";
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
@@ -29,6 +30,19 @@ namespace Emp.WebApi
 			services.AddDbContext<EmployeeContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 			services.AddControllers();
 
+			services.AddCors(options =>
+			{
+				options.AddPolicy(DefaultCorsPolicyName, builder =>
+				{
+					//App:CorsOrigins in appsettings.json can contain more than one address with splitted by comma.
+					builder
+						.WithOrigins("http://localhost:4200")
+						.SetIsOriginAllowedToAllowWildcardSubdomains()
+						.AllowAnyHeader()
+						.AllowAnyMethod()
+						.AllowCredentials();
+				});
+			});
 
 			services.AddSignalR();
 
@@ -36,8 +50,7 @@ namespace Emp.WebApi
 				c.SwaggerDoc(name:  "V1",  new Microsoft.OpenApi.Models.OpenApiInfo { Title= "Employee Api",  Version="V1"});  
 			});  
 
-			services.AddCors(options => { options.AddDefaultPolicy(builder => { builder.WithOrigins("http://localhost:4200/", "shttp://www.contoso.com").AllowAnyHeader().AllowAnyMethod(); }); });
-			services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+			
 			.AddIdentityServerAuthentication(options =>
 			{
 				options.Authority = "https://localhost:5001";
@@ -63,8 +76,8 @@ namespace Emp.WebApi
 
 			app.UseRouting();
 
-			app.UseCors();
-
+			app.UseCors(DefaultCorsPolicyName);
+			
 			app.HandleException();
 
 			app.UseAuthentication();

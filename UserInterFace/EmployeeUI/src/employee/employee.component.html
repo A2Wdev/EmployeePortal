@@ -1,1 +1,43 @@
-<p>employee works!</p>
+<header>
+<div>
+    <h1>
+        Employees Page
+    </h1>
+    <div>
+
+        <input name="hiringDateInput" [(ngModel)]="hiringDate" />
+
+        <button (click)="search()" >Search</button>
+    </div>
+
+
+</div>
+</header>
+<div>
+    <table class="table table-bordered" *ngIf="employees && employees.length > 0">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Hiring Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor [ngForOf]="employees" let-item let-i="index">
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.age }}</td>
+                    <td>{{ item.hiringDate | date }}</td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <div *ngIf="!employees || employees.length == 0">
+        <h3>
+            There is no employees with the specified hiring date
+        </h3>
+    </div>
+</div>
+<footer>
+<h3>Footer</h3>
+</footer>

@@ -37,7 +37,7 @@ namespace Emp.WebApi.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult Get(DateTime hiringDate)
+		public IActionResult Get(DateTime? hiringDate)
 		{
 			var emp = _emplpyeeService.GetEmployeeByHiringDate(hiringDate);
 

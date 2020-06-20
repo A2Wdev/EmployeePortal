@@ -12,6 +12,7 @@ namespace IdentityServer
     public class Startup
     {
         public IWebHostEnvironment Environment { get; }
+        private const string DefaultCorsPolicyName = "employeePolicy";
 
         public Startup(IWebHostEnvironment environment)
         {
@@ -29,6 +30,20 @@ namespace IdentityServer
                 .AddInMemoryClients(Config.Clients)
                 .AddTestUsers(TestUsers.Users);
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(DefaultCorsPolicyName, builder =>
+                {
+                    //App:CorsOrigins in appsettings.json can contain more than one address with splitted by comma.
+                    builder
+                        .WithOrigins("http://localhost:4200")
+                        .SetIsOriginAllowedToAllowWildcardSubdomains()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
+            });
+
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
         }
@@ -43,8 +58,9 @@ namespace IdentityServer
 			// uncomment if you want to add MVC
 			app.UseStaticFiles();
 			app.UseRouting();
+            app.UseCors(DefaultCorsPolicyName);
 
-			app.UseIdentityServer();
+            app.UseIdentityServer();
 
 			// uncomment, if you want to add MVC
 			app.UseAuthorization();

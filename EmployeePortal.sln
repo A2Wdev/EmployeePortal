@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emp.Domain.core", "Emp.Domain.core\Emp.Domain.core.csproj", "{A41558F0-DEB7-469D-97EC-8AF07C5761C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emp.Domain.core", "Emp.Domain.core\Emp.Domain.core.csproj", "{A41558F0-DEB7-469D-97EC-8AF07C5761C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emp.Domain.Repositry", "Emp.Domain.Repositry\Emp.Domain.Repositry.csproj", "{1816703D-B57F-40BA-AF8E-7F7F1826239E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emp.Domain.Repositry", "Emp.Domain.Repositry\Emp.Domain.Repositry.csproj", "{1816703D-B57F-40BA-AF8E-7F7F1826239E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emp.WebApi", "Emp.WebApi\Emp.WebApi.csproj", "{0E27D123-BB62-4A3D-859D-1BF9C41514AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emp.WebApi", "Emp.WebApi\Emp.WebApi.csproj", "{0E27D123-BB62-4A3D-859D-1BF9C41514AC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{DBAA46B3-DFAC-4C61-BA14-42AA19EC315E}"
 EndProject
