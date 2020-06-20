@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Emp.WebApi.Controllers
 {
@@ -15,19 +16,23 @@ namespace Emp.WebApi.Controllers
     //[Authorize]
 	public class EmployeeController : ControllerBase
 	{
-		 private readonly IEmplpyeeService _emplpyeeService ;  
-
-		public EmployeeController(IEmplpyeeService emplpyeeService)
+		 private readonly IEmplpyeeService _emplpyeeService;
+		private IHubContext<ValuesHub> context;
+		public EmployeeController(IEmplpyeeService emplpyeeService, IHubContext<ValuesHub> hub)
 		{
-			_emplpyeeService = emplpyeeService;  
+			_emplpyeeService = emplpyeeService;
+			this.context = hub;  
 		}
 
 		[HttpPost]
-		public IActionResult AddEmp([FromBody] EmployeeDTO employeeModel)
+		public async Task<IActionResult> AddEmp([FromBody] EmployeeDTO employeeModel)
 		{
-			//Validate Model 
 			var employee = employeeModel.ToEntity();
 			var result = _emplpyeeService.AddEmployee(employee);
+
+			//signalR
+			await context.Clients.All.SendAsync("Add", result.Name);
+
 			return Ok(result.ToModel());
 		}
 
